@@ -1,0 +1,10 @@
+﻿    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.glass-panel,
+.campfire-background,
+.audio-toggle {
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}

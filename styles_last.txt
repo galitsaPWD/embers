@@ -1,0 +1,100 @@
+﻿    cursor: default;
+    transition: opacity 0.3s ease;
+    width: fit-content;
+    /* Critical for correct coordinate mapping */
+    margin: 0 auto;
+    /* Keep centered */
+}
+
+/* Base Tweaks for Layout */
+.landing-title {
+    margin-bottom: 0.2rem !important;
+    /* Tighten up */
+}
+
+.landing-slogan {
+    margin-bottom: 3rem;
+    opacity: 0.8;
+}
+
+/* --- IMMERSIVE MODE TRANSFORMATIONS --- */
+.immersive-mode .glass-panel {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.immersive-mode .campfire-background {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 10;
+    padding-right: 0 !important;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.immersive-mode .audio-toggle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.immersive-exit-btn {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    background: rgba(18, 20, 24, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.immersive-exit-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.glass-panel,
+.campfire-background,
+.audio-toggle {
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* FINAL MOBILE REFINEMENTS */
+@media (max-width: 1024px) {
+    .chat-header {
+        height: 60px;
+        padding: 0 1rem;
+    }
+
+    .message-bubble {
+        max-width: 85%;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+
+    .input-area {
+        padding: 1rem;
+    }
+
+    .immersive-exit-btn {
+        top: 1rem;
+        right: 1rem;
+        width: 42px;
+        height: 42px;
+    }
+}
