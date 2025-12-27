@@ -1,4 +1,4 @@
-import { createApp, ref, onMounted, onUnmounted, computed, watch, nextTick } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { createApp, ref, onMounted, onUnmounted, computed, watch, nextTick } from "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js";
 import { Campfire } from './campfire.js?v=60';
 
 /* --- COMPONENT: Atmosphere --- */

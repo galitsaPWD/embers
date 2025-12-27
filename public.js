@@ -1,4 +1,4 @@
-import { createApp, ref, onMounted, onUnmounted, computed, watch, nextTick } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { createApp, ref, onMounted, onUnmounted, computed, watch, nextTick } from "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js";
 import * as THREE from "https://unpkg.com/three@0.150.0/build/three.module.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, deleteDoc, doc, serverTimestamp, setDoc, updateDoc, where, getDocs, runTransaction } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";

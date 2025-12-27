@@ -1,4 +1,4 @@
-import { ref, onMounted } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { ref, onMounted } from "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js";
 
 export default {
     name: 'LandingBackground',

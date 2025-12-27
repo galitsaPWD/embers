@@ -1,4 +1,4 @@
-const CACHE_NAME = 'embers-cache-v10';
+const CACHE_NAME = 'embers-cache-v11';
 const ASSETS = [
     './',
     'index.html',
