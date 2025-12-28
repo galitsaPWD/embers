@@ -515,7 +515,14 @@ const App = {
             }, 12000);
 
             const unlock = () => {
-                if (audioSystem.value?.listener?.context.state === 'suspended') audioSystem.value.listener.context.resume();
+                if (audioSystem.value) {
+                    if (audioSystem.value.listener?.context.state === 'suspended') {
+                        audioSystem.value.listener.context.resume();
+                    }
+                    if (typeof audioSystem.value.startAmbience === 'function') {
+                        audioSystem.value.startAmbience();
+                    }
+                }
             };
             window.addEventListener('click', unlock, { once: true });
             window.addEventListener('touchstart', unlock, { once: true });

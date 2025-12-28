@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted, watch } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { ref, onMounted, onUnmounted, watch } from "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js";
 import * as THREE from "https://unpkg.com/three@0.150.0/build/three.module.js";
 
 export const Campfire = {
@@ -469,6 +469,7 @@ export const Campfire = {
                 const loader = new THREE.AudioLoader(manager);
                 this.listener = listener;
                 this.isMuted = false;
+                this.hasStarted = false;
                 this.sounds = {};
 
                 // 1. Bonfire (Spatial)
@@ -478,7 +479,7 @@ export const Campfire = {
                     this.sounds.bonfire.setLoop(true);
                     this.sounds.bonfire.setVolume(0); // Start silent for reveal
                     this.sounds.bonfire.setRefDistance(4); // Increased for better range
-                    this.sounds.bonfire.play();
+                    if (this.hasStarted) this.sounds.bonfire.play();
                     this.updateBonfireVolume(0);
                 });
 
@@ -488,7 +489,7 @@ export const Campfire = {
                     this.sounds.ambience.setBuffer(buffer);
                     this.sounds.ambience.setLoop(true);
                     this.sounds.ambience.setVolume(0); // Start silent
-                    this.sounds.ambience.play();
+                    if (this.hasStarted) this.sounds.ambience.play();
                 });
 
                 // 3. Fire Burns (One-shot)
@@ -516,6 +517,23 @@ export const Campfire = {
 
                 // Start life timer
                 this.lifeTimer = setInterval(() => this.playRandomLife(), 15000 + Math.random() * 30000);
+            }
+
+            startAmbience() {
+                if (this.hasStarted) return;
+                this.hasStarted = true;
+
+                // Resume context if needed
+                if (this.listener.context.state === 'suspended') {
+                    this.listener.context.resume();
+                }
+
+                if (this.sounds.bonfire && this.sounds.bonfire.buffer && !this.sounds.bonfire.isPlaying) {
+                    try { this.sounds.bonfire.play(); } catch (e) { }
+                }
+                if (this.sounds.ambience && this.sounds.ambience.buffer && !this.sounds.ambience.isPlaying) {
+                    try { this.sounds.ambience.play(); } catch (e) { }
+                }
             }
 
             updateBonfireVolume(fuelLevel) {
