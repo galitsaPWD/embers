@@ -51,10 +51,26 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // Cache-First for everything else
+    // Cache-First for everything else (with Runtime Caching)
     event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
+        caches.match(event.request).then((cachedResponse) => {
+            if (cachedResponse) return cachedResponse;
+
+            return fetch(event.request).then((networkResponse) => {
+                // Check if we received a valid response
+                if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+                    return networkResponse;
+                }
+
+                // Clone the response
+                const responseToCache = networkResponse.clone();
+
+                caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(event.request, responseToCache);
+                });
+
+                return networkResponse;
+            });
         })
     );
 });
